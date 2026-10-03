@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
@@ -9,51 +10,62 @@
 <style>
 
 body {
-    margin:0;
-    min-height:100vh;
-    overflow:hidden;
+    margin: 0;
+    min-height: 100vh;
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    /* Sayfanın aşağı-yukarı kaymasını sağlar */
+    overflow-x: hidden;
+    overflow-y: auto;
 
-    font-family:Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    background:linear-gradient(
+    font-family: Arial, sans-serif;
+
+    /* Daha açık arka plan */
+    background: linear-gradient(
         135deg,
-        #fffaff,
-        #f3e8ff,
-        #e9d5ff,
-        #fce7f3
+        #fffdf7,
+        #eaf7ff,
+        #f5efff,
+        #fff0f5
     );
 
-    background-size:400% 400%;
-    animation:bg 10s infinite alternate;
+    background-size: 400% 400%;
+    animation: bg 10s infinite alternate;
+
+    padding: 40px 15px;
+    box-sizing: border-box;
 }
 
 
 @keyframes bg {
     0% {
-        background-position:left;
+        background-position: left;
     }
 
     100% {
-        background-position:right;
+        background-position: right;
     }
 }
 
 
 .container {
-    text-align:center;
-    color:#7b2cbf;
-    z-index:5;
+    text-align: center;
+    color: #7b2cbf;
+    z-index: 5;
+    width: 100%;
+    max-width: 700px;
 }
 
 
 .heart {
-    width:380px;
-    max-width:85vw;
-    animation:kalp 1.5s infinite;
+    width: 380px;
+    max-width: 85vw;
+    margin: 0 auto;
+
+    animation: kalp 1.5s infinite;
 
     filter:
     drop-shadow(0 0 15px white)
@@ -63,126 +75,143 @@ body {
 
 @keyframes kalp {
     50% {
-        transform:scale(1.07);
+        transform: scale(1.07);
     }
 }
 
 
 svg {
-    width:100%;
+    width: 100%;
 }
 
 
 .name {
-    fill:#8e44ad;
-    font-size:32px;
-    font-weight:bold;
+    fill: #8e44ad;
+    font-size: 32px;
+    font-weight: bold;
 }
 
 
 .small {
-    fill:#a855f7;
-    font-size:18px;
+    fill: #a855f7;
+    font-size: 18px;
 }
 
 
 h1 {
-    font-size:42px;
-    color:#7b2cbf;
-    text-shadow:0 0 10px white;
+    font-size: 42px;
+    color: #7b2cbf;
+    text-shadow: 0 0 10px white;
 }
 
 
 p {
-    font-size:21px;
-    line-height:1.6;
-    color:#5b21b6;
+    font-size: 21px;
+    line-height: 1.6;
+    color: #5b21b6;
 
-    background:rgba(255,255,255,0.55);
+    background: rgba(255,255,255,0.65);
 
-    padding:20px;
-    border-radius:25px;
+    padding: 20px;
+    border-radius: 25px;
 
-    box-shadow:0 0 20px rgba(255,255,255,.8);
+    box-shadow: 0 0 20px rgba(255,255,255,.8);
 }
 
 
 .site {
-    margin-top:15px;
-    font-size:16px;
-    color:#9333ea;
+    margin-top: 15px;
+    font-size: 16px;
+    color: #9333ea;
 }
 
 
-
 .fly {
-    position:absolute;
-    bottom:-50px;
-    font-size:30px;
-    animation:uc 8s linear infinite;
+    position: fixed;
+    bottom: -50px;
+    font-size: 30px;
+    animation: uc 8s linear infinite;
+    pointer-events: none;
 }
 
 
 @keyframes uc {
 
     0% {
-        transform:translateY(0) rotate(0);
-        opacity:0;
+        transform: translateY(0) rotate(0);
+        opacity: 0;
     }
-
 
     20% {
-        opacity:1;
+        opacity: 1;
     }
 
-
     100% {
-        transform:translateY(-110vh) rotate(360deg);
-        opacity:0;
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
     }
 
 }
 
 
-.f1 {left:10%; animation-delay:0s;}
-.f2 {left:25%; animation-delay:2s;}
-.f3 {left:45%; animation-delay:4s;}
-.f4 {left:65%; animation-delay:1s;}
-.f5 {left:85%; animation-delay:3s;}
+.f1 {left: 10%; animation-delay: 0s;}
+.f2 {left: 25%; animation-delay: 2s;}
+.f3 {left: 45%; animation-delay: 4s;}
+.f4 {left: 65%; animation-delay: 1s;}
+.f5 {left: 85%; animation-delay: 3s;}
 
 
 .star {
-    position:absolute;
-    color:white;
-    font-size:25px;
-    animation:parla 1.5s infinite alternate;
+    position: fixed;
+    color: white;
+    font-size: 25px;
+    animation: parla 1.5s infinite alternate;
+    pointer-events: none;
 }
 
 
 @keyframes parla {
 
     from {
-        opacity:.3;
+        opacity: .3;
     }
 
     to {
-        opacity:1;
+        opacity: 1;
     }
 
 }
 
 
-.s1 {top:10%;left:15%;}
-.s2 {top:20%;right:15%;}
-.s3 {bottom:15%;left:10%;}
-.s4 {bottom:20%;right:10%;}
+.s1 {top: 10%; left: 15%;}
+.s2 {top: 20%; right: 15%;}
+.s3 {bottom: 15%; left: 10%;}
+.s4 {bottom: 20%; right: 10%;}
 
+
+/* Telefon için */
+@media (max-width: 600px) {
+
+    h1 {
+        font-size: 32px;
+    }
+
+    p {
+        font-size: 18px;
+        padding: 18px;
+    }
+
+    .heart {
+        width: 320px;
+    }
+
+}
 
 </style>
+
 </head>
 
 <body>
-
 
 <div class="fly f1">💜</div>
 <div class="fly f2">🤍</div>
@@ -190,36 +219,26 @@ p {
 <div class="fly f4">✨</div>
 <div class="fly f5">💜</div>
 
-
 <div class="star s1">✦</div>
 <div class="star s2">✧</div>
 <div class="star s3">✦</div>
 <div class="star s4">✧</div>
 
-
-
 <div class="container">
-
 
 <div class="heart">
 
 <svg viewBox="0 0 500 450">
 
-
 <path
-
 d="
 M250 420
 C220 390 50 280 50 150
 C50 60 160 30 250 125
 C340 30 450 60 450 150
 C450 280 280 390 250 420Z"
-
 fill="white"
-
 />
-
-
 
 <text
 x="250"
@@ -231,8 +250,6 @@ Melek Umut
 
 </text>
 
-
-
 <text
 x="250"
 y="260"
@@ -243,20 +260,13 @@ class="small">
 
 </text>
 
-
 </svg>
 
 </div>
 
-
-
-
 <h1>
 İYİ Kİ VARSIN 💜
 </h1>
-
-
-
 
 <p>
 
@@ -280,10 +290,7 @@ daha yeni basladıkkk... 🥲<br>
 
 İyi ki varsın, iyi ki benim arkadaşımsın. 🌸
 
-
 </p>
-
-
 
 <div class="site">
 
@@ -291,9 +298,7 @@ daha yeni basladıkkk... 🥲<br>
 
 </div>
 
-
 </div>
-
 
 </body>
 </html>
