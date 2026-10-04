@@ -9,18 +9,26 @@
 
 <style>
 
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     margin: 0;
     min-height: 100vh;
-
-    overflow-x: hidden;
-    overflow-y: auto;
+    padding: 20px 15px 170px;
 
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
 
     font-family: Arial, sans-serif;
+    color: #7b2cbf;
 
     background: linear-gradient(
         135deg,
@@ -30,195 +38,163 @@ body {
         #fff0f5
     );
 
-    background-size: 400% 400%;
-    animation: bg 10s infinite alternate;
-
-    padding: 20px 15px 70px;
-    box-sizing: border-box;
+    overflow-x: hidden;
 }
 
-@keyframes bg {
-    0% {
-        background-position: left;
-    }
+/* ANA ALAN */
 
-    100% {
-        background-position: right;
-    }
-}
-
-.container {
-    text-align: center;
-    color: #7b2cbf;
-    z-index: 5;
+.site {
     width: 100%;
-    max-width: 700px;
+    max-width: 600px;
+    text-align: center;
 }
 
-.heart {
+/* KALP */
+
+.heart-box {
     width: 380px;
     max-width: 85vw;
-    margin: 0 auto;
+    margin: 10px auto 25px;
 
     animation: kalp 1.5s infinite;
+}
 
-    filter:
-    drop-shadow(0 0 15px white)
-    drop-shadow(0 0 35px white);
+.heart-box svg {
+    width: 100%;
+    height: auto;
 }
 
 @keyframes kalp {
-    50% {
-        transform: scale(1.07);
+
+    0%, 100% {
+        transform: scale(1);
     }
+
+    50% {
+        transform: scale(1.04);
+    }
+
 }
 
-svg {
-    width: 100%;
-}
-
-.name {
-    fill: #8e44ad;
-    font-size: 32px;
-    font-weight: bold;
-}
-
-.small {
-    fill: #a855f7;
-    font-size: 18px;
-}
+/* YAZILAR */
 
 h1 {
-    font-size: 42px;
-    color: #7b2cbf;
-    text-shadow: 0 0 10px white;
+    font-size: 32px;
+    margin: 10px 0 20px;
 }
 
 p {
-    font-size: 21px;
-    line-height: 1.6;
-    color: #5b21b6;
-
-    background: rgba(255,255,255,0.65);
-
-    padding: 20px;
-    border-radius: 25px;
-
-    box-shadow: 0 0 20px rgba(255,255,255,.8);
+    font-size: 19px;
+    line-height: 1.7;
+    margin: 8px 0;
 }
 
-.site {
-    margin-top: 15px;
-    font-size: 16px;
-    color: #9333ea;
+/* ALT YAZI */
+
+.footer {
+    margin-top: 35px;
+    font-size: 14px;
+    opacity: 0.75;
 }
 
+/* HAFİF UÇAN KALPLER */
 
-/* Uçuşan kalpler */
-
-.fly {
+.float {
     position: fixed;
-    bottom: -50px;
-    font-size: 30px;
-    animation: uc 8s linear infinite;
     pointer-events: none;
+    font-size: 18px;
+    opacity: 0.5;
+
+    animation: floatUp 6s linear forwards;
 }
 
-@keyframes uc {
+@keyframes floatUp {
 
-    0% {
-        transform: translateY(0) rotate(0);
+    from {
+        transform: translateY(20px);
         opacity: 0;
     }
 
     20% {
-        opacity: 1;
+        opacity: 0.5;
     }
 
-    100% {
-        transform: translateY(-110vh) rotate(360deg);
+    to {
+        transform: translateY(-100vh);
         opacity: 0;
     }
 
 }
 
-.f1 {left: 10%; animation-delay: 0s;}
-.f2 {left: 25%; animation-delay: 2s;}
-.f3 {left: 45%; animation-delay: 4s;}
-.f4 {left: 65%; animation-delay: 1s;}
-.f5 {left: 85%; animation-delay: 3s;}
-
-
-/* Yıldızlar */
-
-.star {
-    position: fixed;
-    color: white;
-    font-size: 25px;
-    animation: parla 1.5s infinite alternate;
-    pointer-events: none;
-}
-
-@keyframes parla {
-
-    from {
-        opacity: .3;
-    }
-
-    to {
-        opacity: 1;
-    }
-
-}
-
-.s1 {top: 10%; left: 15%;}
-.s2 {top: 20%; right: 15%;}
-.s3 {bottom: 15%; left: 10%;}
-.s4 {bottom: 20%; right: 10%;}
-
-
-/* 🚨 ACİL DURUM ALANI */
+/* ACİL DURUM ALANI */
 
 .emergency-area {
-    margin-top: 45px;
-    padding-bottom: 20px;
+    margin-top: 160px;
+    text-align: center;
 }
 
 .emergency-button {
-    width: 280px;
-    height: 95px;
+    width: 260px;
+    height: 85px;
 
-    border: none;
-    border-radius: 22px;
+    border: 3px solid #b00000;
+    border-radius: 18px;
 
-    background: #d90429;
+    background: #e60000;
     color: white;
 
-    font-size: 25px;
+    font-size: 21px;
     font-weight: bold;
 
     cursor: pointer;
 
-    box-shadow:
-        0 0 15px rgba(217,4,41,.7),
-        0 0 35px rgba(217,4,41,.5);
+    box-shadow: 0 5px 15px rgba(180, 0, 0, 0.25);
 
-    transition: transform .15s;
+    transition: transform 0.15s;
 }
 
 .emergency-button:active {
-    transform: scale(.93);
+    transform: scale(0.96);
 }
 
-.emergency-count {
-    margin-top: 12px;
-    color: #b00020;
+#count {
+    margin-top: 15px;
+    font-size: 16px;
     font-weight: bold;
-    font-size: 17px;
 }
 
+/* HAFİF ACİL EFEKTİ */
 
-/* Kırmızı acil durum ışığı */
+.emergency-border {
+    position: fixed;
+    inset: 5px;
+
+    border: 5px solid rgba(255, 0, 0, 0.65);
+    border-radius: 12px;
+
+    pointer-events: none;
+    z-index: 9999;
+
+    animation: borderFlash 0.7s ease-out forwards;
+}
+
+@keyframes borderFlash {
+
+    0% {
+        opacity: 0.9;
+    }
+
+    50% {
+        opacity: 0.35;
+    }
+
+    100% {
+        opacity: 0;
+    }
+
+}
+
+/* TEK BİR HAFİF IŞIK */
 
 .emergency-light {
     position: fixed;
@@ -228,150 +204,105 @@ p {
 
     border-radius: 50%;
 
-    background: #ff0033;
+    background: rgba(255, 0, 0, 0.18);
 
-    box-shadow:
-        0 0 20px #ff0033,
-        0 0 50px #ff0033,
-        0 0 90px #ff0033;
+    box-shadow: 0 0 35px rgba(255, 0, 0, 0.45);
 
     pointer-events: none;
+    z-index: 9998;
 
-    animation: emergencyFlash .45s infinite alternate;
-
-    z-index: 20;
+    animation: lightFlash 0.65s ease-out forwards;
 }
 
-@keyframes emergencyFlash {
+@keyframes lightFlash {
 
-    from {
-        opacity: .15;
-        transform: scale(.7);
+    0% {
+        opacity: 0.9;
+        transform: scale(0.7);
     }
 
-    to {
-        opacity: 1;
-        transform: scale(1.3);
-    }
-
-}
-
-
-/* Kırmızı ekran kenarı */
-
-.emergency-border {
-    position: fixed;
-
-    inset: 0;
-
-    pointer-events: none;
-
-    border: 12px solid rgba(255,0,40,.8);
-
-    box-sizing: border-box;
-
-    animation: borderFlash .5s infinite alternate;
-
-    z-index: 19;
-}
-
-@keyframes borderFlash {
-
-    from {
-        opacity: .2;
-
-        box-shadow:
-            inset 0 0 30px rgba(255,0,40,.4);
-    }
-
-    to {
-        opacity: 1;
-
-        box-shadow:
-            inset 0 0 80px rgba(255,0,40,.9),
-            0 0 50px rgba(255,0,40,.8);
+    100% {
+        opacity: 0;
+        transform: scale(1.25);
     }
 
 }
 
-
-/* Telefon */
+/* TELEFON */
 
 @media (max-width: 600px) {
 
+    body {
+        padding-bottom: 150px;
+    }
+
+    .heart-box {
+        margin-top: 5px;
+    }
+
     h1 {
-        font-size: 32px;
+        font-size: 27px;
     }
 
     p {
-        font-size: 18px;
-        padding: 18px;
+        font-size: 17px;
     }
 
-    .heart {
-        width: 320px;
+    .emergency-area {
+        margin-top: 160px;
     }
 
     .emergency-button {
-        width: 250px;
-        height: 85px;
-        font-size: 22px;
+        width: 240px;
+        height: 78px;
+        font-size: 19px;
     }
 
 }
 
 </style>
-
 </head>
 
 <body>
 
-<div class="fly f1">💜</div>
-<div class="fly f2">🤍</div>
-<div class="fly f3">💖</div>
-<div class="fly f4">✨</div>
-<div class="fly f5">💜</div>
+<div class="site">
 
-<div class="star s1">✦</div>
-<div class="star s2">✧</div>
-<div class="star s3">✦</div>
-<div class="star s4">✧</div>
-
-
-<div class="container">
-
-    <div class="heart">
+    <div class="heart-box">
 
         <svg viewBox="0 0 500 450">
 
             <path
-            d="
-            M250 420
-            C220 390 50 280 50 150
-            C50 60 160 30 250 125
-            C340 30 450 60 450 150
-            C450 280 280 390 250 420Z"
-            fill="white"
+                d="M250 420
+                C230 390 40 280 40 145
+                C40 60 140 20 205 80
+                L250 125
+                L295 80
+                C360 20 460 60 460 145
+                C460 280 270 390 250 420Z"
+                fill="white"
+                stroke="#e8c8ff"
+                stroke-width="5"
             />
 
             <text
-            x="250"
-            y="220"
-            text-anchor="middle"
-            class="name">
-
-            Melek Umut
-
+                x="250"
+                y="190"
+                text-anchor="middle"
+                font-size="34"
+                fill="#7b2cbf"
+                font-weight="bold"
+            >
+                Melek Umut
             </text>
 
             <text
-            x="250"
-            y="260"
-            text-anchor="middle"
-            class="small">
-
-            ✨ iyi ki varsın ✨
-
+                x="250"
+                y="235"
+                text-anchor="middle"
+                font-size="22"
+                fill="#a855f7"
+            >
+                ✨ iyi ki varsın ✨
             </text>
 
         </svg>
@@ -379,75 +310,78 @@ p {
     </div>
 
 
-    <h1>
-        İYİ Kİ VARSIN 💖
-    </h1>
+    <h1>İYİ Kİ VARSIN 💖</h1>
 
+
+    <p>Hayatına bazen biri girer</p>
+    <p>ve bütün hayatını güzelleştirir. ✨</p>
+    <p>Sen onlardan birisin.</p>
+
+    <p>daha yeni basladıkkk... 💗</p>
 
     <p>
-
-        Hayatına bazen biri girer<br>
-
-        ve bütün hayatını güzelleştirir. ✨
-
-        <br><br>
-
-        <b>
-        Sen onlardan birisin.
-        </b>
-
-        <br><br>
-
-        daha yeni basladıkkk... 💗
-
-        <br><br>
-
         İyi ki varsın, iyi ki benim melegimsin. 🌸
-
     </p>
 
 
-    <div class="site">
-
+    <div class="footer">
         ✨ Site değişebilir, ara sıra bak 💜 ✨
-
     </div>
 
+</div>
 
-    <!-- 🚨 EN ALTA ACİL DURUM BUTONU -->
 
-    <div class="emergency-area">
+<!-- ACİL DURUM BUTONU -->
 
-        <button
+<div class="emergency-area">
+
+    <button
         class="emergency-button"
-        onclick="emergency()">
-
+        onclick="emergency()"
+    >
         🚨 ACİL DURUM 🚨
+    </button>
 
-        </button>
-
-        <div
-        class="emergency-count"
-        id="count">
-
-        Henüz basılmadı
-
-        </div>
-
-    </div>
+    <div id="count"></div>
 
 </div>
 
 
 <script>
 
-/* Siteye giriş bildirimi */
+/* ZİYARET BİLDİRİMİ */
 
-fetch("https://melos-telegram.ut380806.workers.dev/")
-.catch(() => {});
+fetch(
+    "https://melos-telegram.ut380806.workers.dev/"
+).catch(() => {});
 
 
-/* Acil durum sistemi */
+/* HAFİF UÇAN KALPLER */
+
+setInterval(() => {
+
+    const heart = document.createElement("div");
+
+    heart.className = "float";
+
+    heart.innerText =
+        Math.random() > 0.5 ? "💜" : "✨";
+
+    heart.style.left =
+        Math.random() * 100 + "%";
+
+    heart.style.bottom = "-20px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 6000);
+
+}, 1800);
+
+
+/* ACİL DURUM */
 
 let emergencyCount = 0;
 
@@ -461,20 +395,24 @@ function emergency() {
         " kez basıldı!";
 
 
-    /* Her basışta yeni ekran kenarı */
+    /* Hafif kırmızı çerçeve */
 
-    const border = document.createElement("div");
+    const border =
+        document.createElement("div");
 
-    border.className = "emergency-border";
+    border.className =
+        "emergency-border";
 
     document.body.appendChild(border);
 
 
-    /* Her basışta yeni kırmızı ışık */
+    /* Tek hafif ışık */
 
-    const light = document.createElement("div");
+    const light =
+        document.createElement("div");
 
-    light.className = "emergency-light";
+    light.className =
+        "emergency-light";
 
     light.style.left =
         Math.random() * 80 + 10 + "%";
@@ -485,13 +423,20 @@ function emergency() {
     document.body.appendChild(light);
 
 
-    /* Telegram bildirimi */
+    /* Efektleri kısa sürede temizle */
+
+    setTimeout(() => {
+        border.remove();
+        light.remove();
+    }, 700);
+
+
+    /* TELEGRAM */
 
     fetch(
         "https://melos-telegram.ut380806.workers.dev/?action=emergency&count="
         + emergencyCount
-    )
-    .catch(() => {});
+    ).catch(() => {});
 
 }
 
@@ -500,3 +445,6 @@ function emergency() {
 </body>
 </html>
 ```
+
+**Cloudflare Worker'a dokunma kanka.** Sadece GitHub'daki `index.html` dosyasının tamamını bununla değiştirip **Commit changes** yap.
+Bu sürümde buton daha aşağıda ve efekt önceki kadar abartılı değil; aynı anda çok fazla efekt birikmediği için telefonda daha rahat çalışır.
