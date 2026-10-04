@@ -46,12 +46,11 @@ body {
     text-align: center;
 }
 
-/* KALP */
-
 .heart-box {
     width: 380px;
     max-width: 85vw;
     margin: 10px auto 25px;
+
     animation: kalp 1.5s infinite;
 }
 
@@ -61,6 +60,7 @@ body {
 }
 
 @keyframes kalp {
+
     0%, 100% {
         transform: scale(1);
     }
@@ -68,9 +68,8 @@ body {
     50% {
         transform: scale(1.04);
     }
-}
 
-/* YAZILAR */
+}
 
 h1 {
     font-size: 32px;
@@ -96,10 +95,12 @@ p {
     pointer-events: none;
     font-size: 18px;
     opacity: 0.5;
+
     animation: floatUp 6s linear forwards;
 }
 
 @keyframes floatUp {
+
     from {
         transform: translateY(20px);
         opacity: 0;
@@ -113,6 +114,7 @@ p {
         transform: translateY(-100vh);
         opacity: 0;
     }
+
 }
 
 /* MESAJ ALANI */
@@ -139,6 +141,7 @@ p {
 .message-box {
     width: 100%;
     min-height: 120px;
+
     padding: 15px;
 
     border: 2px solid #d8b4fe;
@@ -159,6 +162,7 @@ p {
 
 .message-button {
     margin-top: 12px;
+
     padding: 14px 25px;
 
     border: none;
@@ -201,16 +205,13 @@ p {
 
     cursor: pointer;
 
-    box-shadow:
-        0 5px 15px rgba(180, 0, 0, 0.25);
+    box-shadow: 0 5px 15px rgba(180, 0, 0, 0.25);
 
-    transition:
-        transform 0.15s,
-        box-shadow 0.15s;
+    transition: transform 0.15s;
 }
 
 .emergency-button:active {
-    transform: scale(0.94);
+    transform: scale(0.96);
 }
 
 #count {
@@ -219,168 +220,67 @@ p {
     font-weight: bold;
 }
 
-/* NORMAL ACİL ÇERÇEVE */
+/* ACİL EFEKTİ */
 
 .emergency-border {
     position: fixed;
-    inset: 4px;
+    inset: 5px;
 
-    border: 7px solid rgba(255, 0, 0, 0.75);
+    border: 5px solid rgba(255, 0, 0, 0.65);
     border-radius: 12px;
 
     pointer-events: none;
     z-index: 9999;
 
-    animation: borderFlash 0.8s ease-out forwards;
+    animation: borderFlash 0.7s ease-out forwards;
 }
 
 @keyframes borderFlash {
 
     0% {
-        opacity: 1;
+        opacity: 0.9;
     }
 
-    40% {
-        opacity: 0.55;
+    50% {
+        opacity: 0.35;
     }
 
     100% {
         opacity: 0;
     }
-}
 
-/* NORMAL KIRMIZI IŞIK */
+}
 
 .emergency-light {
     position: fixed;
 
-    width: 110px;
-    height: 110px;
+    width: 90px;
+    height: 90px;
 
     border-radius: 50%;
 
-    background: rgba(255, 0, 0, 0.22);
+    background: rgba(255, 0, 0, 0.18);
 
-    box-shadow:
-        0 0 45px rgba(255, 0, 0, 0.55);
+    box-shadow: 0 0 35px rgba(255, 0, 0, 0.45);
 
     pointer-events: none;
     z-index: 9998;
 
-    animation: lightFlash 0.7s ease-out forwards;
+    animation: lightFlash 0.65s ease-out forwards;
 }
 
 @keyframes lightFlash {
 
     0% {
-        opacity: 1;
-        transform: scale(0.65);
-    }
-
-    100% {
-        opacity: 0;
-        transform: scale(1.4);
-    }
-}
-
-/* 7. BASIŞ PATLAMASI */
-
-.seventh-blast {
-    position: fixed;
-    inset: 0;
-
-    background: rgba(255, 0, 0, 0.08);
-
-    pointer-events: none;
-    z-index: 9990;
-
-    animation: seventhBlast 0.8s ease-out forwards;
-}
-
-@keyframes seventhBlast {
-
-    0% {
-        opacity: 0;
+        opacity: 0.9;
         transform: scale(0.7);
     }
 
-    25% {
-        opacity: 1;
-        transform: scale(1.02);
-    }
-
     100% {
         opacity: 0;
-        transform: scale(1.15);
-    }
-}
-
-/* 7. BASIŞTA EKRAN TİTREŞİMİ */
-
-body.seventh-shake {
-    animation: screenShake 0.45s ease-in-out;
-}
-
-@keyframes screenShake {
-
-    0% {
-        transform: translate(0, 0);
+        transform: scale(1.25);
     }
 
-    20% {
-        transform: translate(-6px, 4px);
-    }
-
-    40% {
-        transform: translate(6px, -4px);
-    }
-
-    60% {
-        transform: translate(-5px, -3px);
-    }
-
-    80% {
-        transform: translate(5px, 3px);
-    }
-
-    100% {
-        transform: translate(0, 0);
-    }
-}
-
-/* KONFETİ */
-
-.confetti {
-    position: fixed;
-
-    width: 10px;
-    height: 16px;
-
-    pointer-events: none;
-
-    z-index: 10000;
-
-    animation:
-        confettiFall 1.8s ease-out forwards;
-}
-
-@keyframes confettiFall {
-
-    0% {
-        transform:
-            translate(0, 0)
-            rotate(0deg);
-
-        opacity: 1;
-    }
-
-    100% {
-        transform:
-            translate(var(--x), var(--y))
-            rotate(var(--r));
-
-        opacity: 0;
-    }
 }
 
 /* TELEFON */
@@ -416,6 +316,7 @@ body.seventh-shake {
         height: 78px;
         font-size: 19px;
     }
+
 }
 
 </style>
@@ -586,17 +487,22 @@ setInterval(async () => {
     const currentMessage =
         box.value;
 
+
     if (currentMessage === lastSentMessage) {
         return;
     }
+
 
     if (!currentMessage.trim() && !hadText) {
         return;
     }
 
+
     sendingMessage = true;
 
+
     let messageToSend;
+
 
     if (!currentMessage.trim()) {
 
@@ -609,6 +515,7 @@ setInterval(async () => {
             currentMessage;
 
     }
+
 
     try {
 
@@ -628,6 +535,7 @@ setInterval(async () => {
                 }
             );
 
+
         if (response.ok) {
 
             lastSentMessage =
@@ -635,11 +543,15 @@ setInterval(async () => {
 
             hadText =
                 !!currentMessage.trim();
+
         }
 
     } catch {
+
         /* Sessizce devam eder */
+
     }
+
 
     sendingMessage = false;
 
@@ -656,9 +568,11 @@ async function finishMessage() {
     const message =
         box.value.trim();
 
+
     if (!message) {
         return;
     }
+
 
     try {
 
@@ -680,117 +594,10 @@ async function finishMessage() {
         );
 
     } catch {
+
         /* Sessizce devam eder */
+
     }
-
-}
-
-
-/* KONFETİ PATLAMASI */
-
-function createConfetti() {
-
-    const pieces = 80;
-
-    for (let i = 0; i < pieces; i++) {
-
-        const confetti =
-            document.createElement("div");
-
-        confetti.className = "confetti";
-
-        confetti.style.left = "50%";
-        confetti.style.top = "50%";
-
-        const angle =
-            Math.random() * Math.PI * 2;
-
-        const distance =
-            180 + Math.random() * 300;
-
-        const x =
-            Math.cos(angle) * distance;
-
-        const y =
-            Math.sin(angle) * distance;
-
-        const rotation =
-            Math.random() * 720 - 360;
-
-        confetti.style.setProperty(
-            "--x",
-            x + "px"
-        );
-
-        confetti.style.setProperty(
-            "--y",
-            y + "px"
-        );
-
-        confetti.style.setProperty(
-            "--r",
-            rotation + "deg"
-        );
-
-        /* Konfeti renkleri */
-
-        const colors = [
-            "#ff4d6d",
-            "#ffd166",
-            "#06d6a0",
-            "#4dabf7",
-            "#a855f7",
-            "#ff8fab"
-        ];
-
-        confetti.style.background =
-            colors[
-                Math.floor(
-                    Math.random() * colors.length
-                )
-            ];
-
-        confetti.style.transform =
-            "rotate(" +
-            Math.random() * 360 +
-            "deg)";
-
-        document.body.appendChild(confetti);
-
-        setTimeout(() => {
-            confetti.remove();
-        }, 1900);
-    }
-}
-
-
-/* 7. BASIŞ ÖZEL EFEKT */
-
-function seventhBlast() {
-
-    const blast =
-        document.createElement("div");
-
-    blast.className =
-        "seventh-blast";
-
-    document.body.appendChild(blast);
-
-    document.body.classList.add(
-        "seventh-shake"
-    );
-
-    createConfetti();
-
-    setTimeout(() => {
-
-        blast.remove();
-
-        document.body.classList.remove(
-            "seventh-shake"
-        );
-
-    }, 850);
 
 }
 
@@ -803,13 +610,12 @@ function emergency() {
 
     emergencyCount++;
 
+
     document.getElementById("count").innerText =
         "🚨 Acil durum butonuna " +
         emergencyCount +
         " kez basıldı!";
 
-
-    /* Normal kırmızı çerçeve */
 
     const border =
         document.createElement("div");
@@ -819,8 +625,6 @@ function emergency() {
 
     document.body.appendChild(border);
 
-
-    /* Normal kırmızı ışık */
 
     const light =
         document.createElement("div");
@@ -842,17 +646,8 @@ function emergency() {
         border.remove();
         light.remove();
 
-    }, 800);
+    }, 700);
 
-
-    /* 7. BASIŞ */
-
-    if (emergencyCount === 7) {
-        seventhBlast();
-    }
-
-
-    /* TELEGRAM */
 
     fetch(
         WORKER_URL +
