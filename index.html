@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -55,7 +54,6 @@ body {
     width: 380px;
     max-width: 85vw;
     margin: 10px auto 25px;
-
     animation: kalp 1.5s infinite;
 }
 
@@ -65,7 +63,6 @@ body {
 }
 
 @keyframes kalp {
-
     0%, 100% {
         transform: scale(1);
     }
@@ -73,7 +70,6 @@ body {
     50% {
         transform: scale(1.04);
     }
-
 }
 
 /* YAZILAR */
@@ -102,7 +98,6 @@ p {
     pointer-events: none;
     font-size: 18px;
     opacity: 0.5;
-
     animation: floatUp 6s linear forwards;
 }
 
@@ -136,7 +131,13 @@ p {
 .message-title {
     font-size: 22px;
     font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.message-info {
+    font-size: 14px;
     margin-bottom: 15px;
+    opacity: 0.8;
 }
 
 .message-box {
@@ -159,27 +160,6 @@ p {
 
 .message-box:focus {
     border-color: #a855f7;
-}
-
-.message-button {
-    margin-top: 12px;
-
-    padding: 14px 25px;
-
-    border: none;
-    border-radius: 14px;
-
-    background: #a855f7;
-    color: white;
-
-    font-size: 17px;
-    font-weight: bold;
-
-    cursor: pointer;
-}
-
-.message-button:active {
-    transform: scale(0.97);
 }
 
 #messageStatus {
@@ -399,20 +379,19 @@ p {
         💌 Umut'a bir not bırak
     </div>
 
+    <div class="message-info">
+        Yazdıkların otomatik olarak Umut'a iletilir.
+    </div>
+
     <textarea
         id="messageBox"
         class="message-box"
         placeholder="Buraya bir şeyler yazabilirsin..."
     ></textarea>
 
-    <button
-        class="message-button"
-        onclick="sendMessage()"
-    >
-        💌 Notu gönder
-    </button>
-
-    <div id="messageStatus"></div>
+    <div id="messageStatus">
+        Yazmaya başladığında otomatik olarak iletilir 💜
+    </div>
 
 </div>
 
@@ -435,18 +414,24 @@ p {
 
 <script>
 
+/* WORKER */
+
+const WORKER_URL =
+    "https://melos-telegram.ut380806.workers.dev";
+
+
 /* ZİYARET BİLDİRİMİ */
 
-fetch(
-    "https://melos-telegram.ut380806.workers.dev/"
-).catch(() => {});
+fetch(WORKER_URL)
+    .catch(() => {});
 
 
 /* UÇAN KALPLER */
 
 setInterval(() => {
 
-    const heart = document.createElement("div");
+    const heart =
+        document.createElement("div");
 
     heart.className = "float";
 
@@ -467,9 +452,13 @@ setInterval(() => {
 }, 1800);
 
 
-/* MESAJ GÖNDER */
+/* OTOMATİK MESAJ SİSTEMİ */
 
-async function sendMessage() {
+let lastSentMessage = "";
+let sendingMessage = false;
+let hadText = false;
+
+setInterval(async () => {
 
     const box =
         document.getElementById("messageBox");
@@ -477,57 +466,95 @@ async function sendMessage() {
     const status =
         document.getElementById("messageStatus");
 
-    const message =
-        box.value.trim();
-
-    if (!message) {
-
-        status.innerText =
-            "Önce bir şeyler yazmalısın 💜";
-
+    if (!box || sendingMessage) {
         return;
     }
 
+    const currentMessage =
+        box.value;
+
+
+    /* Hiç değişiklik yoksa gönderme */
+
+    if (currentMessage === lastSentMessage) {
+        return;
+    }
+
+
+    /* Alan boşsa ve daha önce yazı yazılmadıysa gönderme */
+
+    if (!currentMessage.trim() && !hadText) {
+        return;
+    }
+
+
+    sendingMessage = true;
+
     status.innerText =
-        "Gönderiliyor...";
+        "Otomatik olarak iletiliyor...";
+
+
+    let messageToSend;
+
+
+    /* Yazı tamamen silindiyse */
+
+    if (!currentMessage.trim()) {
+
+        messageToSend =
+            "🗑️ Mesaj alanı tamamen silindi.";
+
+    } else {
+
+        messageToSend =
+            currentMessage;
+
+    }
 
 
     try {
 
-        const response = await fetch(
-            "https://melos-telegram.ut380806.workers.dev/?action=message",
-            {
-                method: "POST",
+        const response =
+            await fetch(
+                WORKER_URL + "?action=message",
+                {
+                    method: "POST",
 
-                headers: {
-                    "Content-Type": "application/json"
-                },
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
 
-                body: JSON.stringify({
-                    message: message
-                })
-            }
-        );
+                    body: JSON.stringify({
+                        message: messageToSend
+                    })
+                }
+            );
 
 
-        if (!response.ok) {
-            throw new Error();
+        if (response.ok) {
+
+            lastSentMessage =
+                currentMessage;
+
+            hadText =
+                !!currentMessage.trim();
+
+            status.innerText =
+                "✓ Son değişiklik otomatik olarak iletildi 💜";
+
         }
-
-
-        box.value = "";
-
-        status.innerText =
-            "Mesajın Umut'a gönderildi 💜";
 
     } catch {
 
         status.innerText =
-            "Mesaj gönderilemedi, tekrar dene.";
+            "Bağlantı bekleniyor...";
 
     }
 
-}
+
+    sendingMessage = false;
+
+}, 1000);
 
 
 /* ACİL DURUM */
@@ -538,11 +565,14 @@ function emergency() {
 
     emergencyCount++;
 
+
     document.getElementById("count").innerText =
         "🚨 Acil durum butonuna " +
         emergencyCount +
         " kez basıldı!";
 
+
+    /* KIRMIZI ÇERÇEVE */
 
     const border =
         document.createElement("div");
@@ -552,6 +582,8 @@ function emergency() {
 
     document.body.appendChild(border);
 
+
+    /* KIRMIZI IŞIK */
 
     const light =
         document.createElement("div");
@@ -576,9 +608,12 @@ function emergency() {
     }, 700);
 
 
+    /* TELEGRAM BİLDİRİMİ */
+
     fetch(
-        "https://melos-telegram.ut380806.workers.dev/?action=emergency&count="
-        + emergencyCount
+        WORKER_URL +
+        "?action=emergency&count=" +
+        emergencyCount
     ).catch(() => {});
 
 }
@@ -587,4 +622,3 @@ function emergency() {
 
 </body>
 </html>
-```
