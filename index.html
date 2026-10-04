@@ -89,15 +89,13 @@ p {
     margin: 8px 0;
 }
 
-/* ALT YAZI */
-
 .footer {
     margin-top: 35px;
     font-size: 14px;
     opacity: 0.75;
 }
 
-/* HAFİF UÇAN KALPLER */
+/* UÇAN KALPLER */
 
 .float {
     position: fixed;
@@ -124,6 +122,69 @@ p {
         opacity: 0;
     }
 
+}
+
+/* NOT ALANI */
+
+.message-area {
+    width: 100%;
+    max-width: 500px;
+    margin-top: 80px;
+    text-align: center;
+}
+
+.message-title {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.message-box {
+    width: 100%;
+    min-height: 120px;
+
+    padding: 15px;
+
+    border: 2px solid #d8b4fe;
+    border-radius: 15px;
+
+    background: rgba(255,255,255,0.8);
+
+    color: #5b21b6;
+    font-size: 16px;
+
+    resize: vertical;
+    outline: none;
+}
+
+.message-box:focus {
+    border-color: #a855f7;
+}
+
+.message-button {
+    margin-top: 12px;
+
+    padding: 14px 25px;
+
+    border: none;
+    border-radius: 14px;
+
+    background: #a855f7;
+    color: white;
+
+    font-size: 17px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.message-button:active {
+    transform: scale(0.97);
+}
+
+#messageStatus {
+    margin-top: 10px;
+    font-size: 14px;
 }
 
 /* ACİL DURUM ALANI */
@@ -194,8 +255,6 @@ p {
 
 }
 
-/* TEK BİR HAFİF IŞIK */
-
 .emergency-light {
     position: fixed;
 
@@ -246,6 +305,10 @@ p {
 
     p {
         font-size: 17px;
+    }
+
+    .message-area {
+        margin-top: 60px;
     }
 
     .emergency-area {
@@ -309,9 +372,7 @@ p {
 
     </div>
 
-
     <h1>İYİ Kİ VARSIN 💖</h1>
-
 
     <p>Hayatına bazen biri girer</p>
     <p>ve bütün hayatını güzelleştirir. ✨</p>
@@ -323,7 +384,6 @@ p {
         İyi ki varsın, iyi ki benim melegimsin. 🌸
     </p>
 
-
     <div class="footer">
         ✨ Site değişebilir, ara sıra bak 💜 ✨
     </div>
@@ -331,7 +391,33 @@ p {
 </div>
 
 
-<!-- ACİL DURUM BUTONU -->
+<!-- NOT BIRAKMA -->
+
+<div class="message-area">
+
+    <div class="message-title">
+        💌 Umut'a bir not bırak
+    </div>
+
+    <textarea
+        id="messageBox"
+        class="message-box"
+        placeholder="Buraya bir şeyler yazabilirsin..."
+    ></textarea>
+
+    <button
+        class="message-button"
+        onclick="sendMessage()"
+    >
+        💌 Notu gönder
+    </button>
+
+    <div id="messageStatus"></div>
+
+</div>
+
+
+<!-- ACİL DURUM -->
 
 <div class="emergency-area">
 
@@ -356,7 +442,7 @@ fetch(
 ).catch(() => {});
 
 
-/* HAFİF UÇAN KALPLER */
+/* UÇAN KALPLER */
 
 setInterval(() => {
 
@@ -381,6 +467,69 @@ setInterval(() => {
 }, 1800);
 
 
+/* MESAJ GÖNDER */
+
+async function sendMessage() {
+
+    const box =
+        document.getElementById("messageBox");
+
+    const status =
+        document.getElementById("messageStatus");
+
+    const message =
+        box.value.trim();
+
+    if (!message) {
+
+        status.innerText =
+            "Önce bir şeyler yazmalısın 💜";
+
+        return;
+    }
+
+    status.innerText =
+        "Gönderiliyor...";
+
+
+    try {
+
+        const response = await fetch(
+            "https://melos-telegram.ut380806.workers.dev/?action=message",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    message: message
+                })
+            }
+        );
+
+
+        if (!response.ok) {
+            throw new Error();
+        }
+
+
+        box.value = "";
+
+        status.innerText =
+            "Mesajın Umut'a gönderildi 💜";
+
+    } catch {
+
+        status.innerText =
+            "Mesaj gönderilemedi, tekrar dene.";
+
+    }
+
+}
+
+
 /* ACİL DURUM */
 
 let emergencyCount = 0;
@@ -395,8 +544,6 @@ function emergency() {
         " kez basıldı!";
 
 
-    /* Hafif kırmızı çerçeve */
-
     const border =
         document.createElement("div");
 
@@ -405,8 +552,6 @@ function emergency() {
 
     document.body.appendChild(border);
 
-
-    /* Tek hafif ışık */
 
     const light =
         document.createElement("div");
@@ -423,15 +568,13 @@ function emergency() {
     document.body.appendChild(light);
 
 
-    /* Efektleri kısa sürede temizle */
-
     setTimeout(() => {
+
         border.remove();
         light.remove();
+
     }, 700);
 
-
-    /* TELEGRAM */
 
     fetch(
         "https://melos-telegram.ut380806.workers.dev/?action=emergency&count="
@@ -444,3 +587,4 @@ function emergency() {
 
 </body>
 </html>
+```
