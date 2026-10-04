@@ -12,12 +12,13 @@
 body {
     margin: 0;
     min-height: 100vh;
+
     overflow-x: hidden;
     overflow-y: auto;
 
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 
     font-family: Arial, sans-serif;
 
@@ -32,13 +33,18 @@ body {
     background-size: 400% 400%;
     animation: bg 10s infinite alternate;
 
-    padding: 40px 15px;
+    padding: 20px 15px 70px;
     box-sizing: border-box;
 }
 
 @keyframes bg {
-    0% { background-position: left; }
-    100% { background-position: right; }
+    0% {
+        background-position: left;
+    }
+
+    100% {
+        background-position: right;
+    }
 }
 
 .container {
@@ -107,6 +113,9 @@ p {
     color: #9333ea;
 }
 
+
+/* Uçuşan kalpler */
+
 .fly {
     position: fixed;
     bottom: -50px;
@@ -116,6 +125,7 @@ p {
 }
 
 @keyframes uc {
+
     0% {
         transform: translateY(0) rotate(0);
         opacity: 0;
@@ -129,6 +139,7 @@ p {
         transform: translateY(-110vh) rotate(360deg);
         opacity: 0;
     }
+
 }
 
 .f1 {left: 10%; animation-delay: 0s;}
@@ -136,6 +147,9 @@ p {
 .f3 {left: 45%; animation-delay: 4s;}
 .f4 {left: 65%; animation-delay: 1s;}
 .f5 {left: 85%; animation-delay: 3s;}
+
+
+/* Yıldızlar */
 
 .star {
     position: fixed;
@@ -146,8 +160,15 @@ p {
 }
 
 @keyframes parla {
-    from { opacity: .3; }
-    to { opacity: 1; }
+
+    from {
+        opacity: .3;
+    }
+
+    to {
+        opacity: 1;
+    }
+
 }
 
 .s1 {top: 10%; left: 15%;}
@@ -156,15 +177,16 @@ p {
 .s4 {bottom: 20%; right: 10%;}
 
 
-/* 🚨 ACİL DURUM BUTONU */
+/* 🚨 ACİL DURUM ALANI */
 
 .emergency-area {
-    margin-top: 30px;
+    margin-top: 45px;
+    padding-bottom: 20px;
 }
 
 .emergency-button {
-    width: 270px;
-    height: 90px;
+    width: 280px;
+    height: 95px;
 
     border: none;
     border-radius: 22px;
@@ -196,10 +218,11 @@ p {
 }
 
 
-/* Kırmızı acil durum ışıkları */
+/* Kırmızı acil durum ışığı */
 
 .emergency-light {
     position: fixed;
+
     width: 90px;
     height: 90px;
 
@@ -215,10 +238,12 @@ p {
     pointer-events: none;
 
     animation: emergencyFlash .45s infinite alternate;
+
     z-index: 20;
 }
 
 @keyframes emergencyFlash {
+
     from {
         opacity: .15;
         transform: scale(.7);
@@ -228,13 +253,15 @@ p {
         opacity: 1;
         transform: scale(1.3);
     }
+
 }
 
 
-/* Ekran kenarındaki kırmızı uyarı */
+/* Kırmızı ekran kenarı */
 
 .emergency-border {
     position: fixed;
+
     inset: 0;
 
     pointer-events: none;
@@ -249,21 +276,26 @@ p {
 }
 
 @keyframes borderFlash {
+
     from {
         opacity: .2;
-        box-shadow: inset 0 0 30px rgba(255,0,40,.4);
+
+        box-shadow:
+            inset 0 0 30px rgba(255,0,40,.4);
     }
 
     to {
         opacity: 1;
+
         box-shadow:
             inset 0 0 80px rgba(255,0,40,.9),
             0 0 50px rgba(255,0,40,.8);
     }
+
 }
 
 
-/* Telefon için */
+/* Telefon */
 
 @media (max-width: 600px) {
 
@@ -281,14 +313,15 @@ p {
     }
 
     .emergency-button {
-        width: 240px;
-        height: 82px;
+        width: 250px;
+        height: 85px;
         font-size: 22px;
     }
 
 }
 
 </style>
+
 </head>
 
 <body>
@@ -307,97 +340,101 @@ p {
 
 <div class="container">
 
-<div class="heart">
+    <div class="heart">
 
-<svg viewBox="0 0 500 450">
+        <svg viewBox="0 0 500 450">
 
-<path
-d="
-M250 420
-C220 390 50 280 50 150
-C50 60 160 30 250 125
-C340 30 450 60 450 150
-C450 280 280 390 250 420Z"
-fill="white"
-/>
+            <path
+            d="
+            M250 420
+            C220 390 50 280 50 150
+            C50 60 160 30 250 125
+            C340 30 450 60 450 150
+            C450 280 280 390 250 420Z"
+            fill="white"
+            />
 
-<text
-x="250"
-y="220"
-text-anchor="middle"
-class="name">
+            <text
+            x="250"
+            y="220"
+            text-anchor="middle"
+            class="name">
 
-Melek Umut
+            Melek Umut
 
-</text>
+            </text>
 
-<text
-x="250"
-y="260"
-text-anchor="middle"
-class="small">
+            <text
+            x="250"
+            y="260"
+            text-anchor="middle"
+            class="small">
 
-✨ iyi ki varsın ✨
+            ✨ iyi ki varsın ✨
 
-</text>
+            </text>
 
-</svg>
+        </svg>
 
-</div>
-
-
-<h1>
-İYİ Kİ VARSIN 💖
-</h1>
+    </div>
 
 
-<p>
-
-Hayatına bazen biri girer<br>
-
-ve bütün hayatını güzelleştirir. ✨
-
-<br><br>
-
-<b>
-Sen onlardan birisin.
-</b>
-
-<br><br>
-
-daha yeni basladıkkk... 💗
-
-<br><br>
-
-İyi ki varsın, iyi ki benim melegimsin. 🌸
-
-</p>
+    <h1>
+        İYİ Kİ VARSIN 💖
+    </h1>
 
 
-<!-- 🚨 ACİL DURUM -->
+    <p>
 
-<div class="emergency-area">
+        Hayatına bazen biri girer<br>
 
-<button
-class="emergency-button"
-onclick="emergency()">
+        ve bütün hayatını güzelleştirir. ✨
 
-🚨 ACİL DURUM 🚨
+        <br><br>
 
-</button>
+        <b>
+        Sen onlardan birisin.
+        </b>
 
-<div class="emergency-count" id="count">
-Henüz basılmadı
-</div>
+        <br><br>
 
-</div>
+        daha yeni basladıkkk... 💗
+
+        <br><br>
+
+        İyi ki varsın, iyi ki benim melegimsin. 🌸
+
+    </p>
 
 
-<div class="site">
+    <div class="site">
 
-✨ Site değişebilir, ara sıra bak 💜 ✨
+        ✨ Site değişebilir, ara sıra bak 💜 ✨
 
-</div>
+    </div>
+
+
+    <!-- 🚨 EN ALTA ACİL DURUM BUTONU -->
+
+    <div class="emergency-area">
+
+        <button
+        class="emergency-button"
+        onclick="emergency()">
+
+        🚨 ACİL DURUM 🚨
+
+        </button>
+
+        <div
+        class="emergency-count"
+        id="count">
+
+        Henüz basılmadı
+
+        </div>
+
+    </div>
 
 </div>
 
@@ -424,7 +461,7 @@ function emergency() {
         " kez basıldı!";
 
 
-    /* Ekran kenarı efekti */
+    /* Her basışta yeni ekran kenarı */
 
     const border = document.createElement("div");
 
@@ -433,7 +470,7 @@ function emergency() {
     document.body.appendChild(border);
 
 
-    /* Yeni kırmızı ışık */
+    /* Her basışta yeni kırmızı ışık */
 
     const light = document.createElement("div");
 
