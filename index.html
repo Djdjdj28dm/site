@@ -40,20 +40,17 @@ body {
     overflow-x: hidden;
 }
 
-/* ANA ALAN */
-
 .site {
     width: 100%;
     max-width: 600px;
     text-align: center;
 }
 
-/* KALP */
-
 .heart-box {
     width: 380px;
     max-width: 85vw;
     margin: 10px auto 25px;
+
     animation: kalp 1.5s infinite;
 }
 
@@ -63,6 +60,7 @@ body {
 }
 
 @keyframes kalp {
+
     0%, 100% {
         transform: scale(1);
     }
@@ -70,9 +68,8 @@ body {
     50% {
         transform: scale(1.04);
     }
-}
 
-/* YAZILAR */
+}
 
 h1 {
     font-size: 32px;
@@ -98,6 +95,7 @@ p {
     pointer-events: none;
     font-size: 18px;
     opacity: 0.5;
+
     animation: floatUp 6s linear forwards;
 }
 
@@ -119,7 +117,7 @@ p {
 
 }
 
-/* NOT ALANI */
+/* MESAJ ALANI */
 
 .message-area {
     width: 100%;
@@ -162,12 +160,30 @@ p {
     border-color: #a855f7;
 }
 
-#messageStatus {
-    margin-top: 10px;
-    font-size: 14px;
+.message-button {
+    margin-top: 12px;
+
+    padding: 14px 25px;
+
+    border: none;
+    border-radius: 14px;
+
+    background: #a855f7;
+    color: white;
+
+    font-size: 17px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: transform 0.15s;
 }
 
-/* ACİL DURUM ALANI */
+.message-button:active {
+    transform: scale(0.97);
+}
+
+/* ACİL DURUM */
 
 .emergency-area {
     margin-top: 160px;
@@ -204,7 +220,7 @@ p {
     font-weight: bold;
 }
 
-/* HAFİF ACİL EFEKTİ */
+/* ACİL EFEKTİ */
 
 .emergency-border {
     position: fixed;
@@ -371,7 +387,7 @@ p {
 </div>
 
 
-<!-- NOT BIRAKMA -->
+<!-- MESAJ -->
 
 <div class="message-area">
 
@@ -389,9 +405,12 @@ p {
         placeholder="Buraya bir şeyler yazabilirsin..."
     ></textarea>
 
-    <div id="messageStatus">
-        Yazmaya başladığında otomatik olarak iletilir 💜
-    </div>
+    <button
+        class="message-button"
+        onclick="finishMessage()"
+    >
+        📨 Mesajı Gönder
+    </button>
 
 </div>
 
@@ -414,13 +433,11 @@ p {
 
 <script>
 
-/* WORKER */
-
 const WORKER_URL =
     "https://melos-telegram.ut380806.workers.dev";
 
 
-/* ZİYARET BİLDİRİMİ */
+/* SİTEYE GİRİŞ */
 
 fetch(WORKER_URL)
     .catch(() => {});
@@ -452,7 +469,7 @@ setInterval(() => {
 }, 1800);
 
 
-/* OTOMATİK MESAJ SİSTEMİ */
+/* OTOMATİK MESAJ */
 
 let lastSentMessage = "";
 let sendingMessage = false;
@@ -463,9 +480,6 @@ setInterval(async () => {
     const box =
         document.getElementById("messageBox");
 
-    const status =
-        document.getElementById("messageStatus");
-
     if (!box || sendingMessage) {
         return;
     }
@@ -474,14 +488,10 @@ setInterval(async () => {
         box.value;
 
 
-    /* Hiç değişiklik yoksa gönderme */
-
     if (currentMessage === lastSentMessage) {
         return;
     }
 
-
-    /* Alan boşsa ve daha önce yazı yazılmadıysa gönderme */
 
     if (!currentMessage.trim() && !hadText) {
         return;
@@ -490,14 +500,9 @@ setInterval(async () => {
 
     sendingMessage = true;
 
-    status.innerText =
-        "Otomatik olarak iletiliyor...";
-
 
     let messageToSend;
 
-
-    /* Yazı tamamen silindiyse */
 
     if (!currentMessage.trim()) {
 
@@ -539,15 +544,11 @@ setInterval(async () => {
             hadText =
                 !!currentMessage.trim();
 
-            status.innerText =
-                "✓ Son değişiklik otomatik olarak iletildi 💜";
-
         }
 
     } catch {
 
-        status.innerText =
-            "Bağlantı bekleniyor...";
+        /* Sessizce devam eder */
 
     }
 
@@ -555,6 +556,50 @@ setInterval(async () => {
     sendingMessage = false;
 
 }, 1000);
+
+
+/* MESAJI BİTİR */
+
+async function finishMessage() {
+
+    const box =
+        document.getElementById("messageBox");
+
+    const message =
+        box.value.trim();
+
+
+    if (!message) {
+        return;
+    }
+
+
+    try {
+
+        await fetch(
+            WORKER_URL + "?action=message",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    message:
+                        "✅ MESAJ TAMAMLANDI\n\n" +
+                        message
+                })
+            }
+        );
+
+    } catch {
+
+        /* Sessizce devam eder */
+
+    }
+
+}
 
 
 /* ACİL DURUM */
@@ -572,8 +617,6 @@ function emergency() {
         " kez basıldı!";
 
 
-    /* KIRMIZI ÇERÇEVE */
-
     const border =
         document.createElement("div");
 
@@ -582,8 +625,6 @@ function emergency() {
 
     document.body.appendChild(border);
 
-
-    /* KIRMIZI IŞIK */
 
     const light =
         document.createElement("div");
@@ -607,8 +648,6 @@ function emergency() {
 
     }, 700);
 
-
-    /* TELEGRAM BİLDİRİMİ */
 
     fetch(
         WORKER_URL +
