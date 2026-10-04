@@ -283,6 +283,20 @@ p {
 
 }
 
+@keyframes lightFlash {
+
+    0% {
+        opacity: 0.9;
+        transform: scale(0.7);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(1.25);
+    }
+
+}
+
 /* TELEFON */
 
 @media (max-width: 600px) {
@@ -437,13 +451,17 @@ const WORKER_URL =
     "https://melos-telegram.ut380806.workers.dev";
 
 
-/* SİTEYE GİRİŞ */
+/* =========================
+   SİTEYE GİRİŞ BİLDİRİMİ
+========================= */
 
-fetch(WORKER_URL)
+fetch(WORKER_URL + "?action=visit")
     .catch(() => {});
 
 
-/* UÇAN KALPLER */
+/* =========================
+   UÇAN KALPLER
+========================= */
 
 setInterval(() => {
 
@@ -469,7 +487,9 @@ setInterval(() => {
 }, 1800);
 
 
-/* OTOMATİK MESAJ */
+/* =========================
+   OTOMATİK MESAJ
+========================= */
 
 let lastSentMessage = "";
 let sendingMessage = false;
@@ -499,7 +519,6 @@ setInterval(async () => {
 
 
     sendingMessage = true;
-
 
     let messageToSend;
 
@@ -558,7 +577,9 @@ setInterval(async () => {
 }, 1000);
 
 
-/* MESAJI BİTİR */
+/* =========================
+   MESAJI BİTİR
+========================= */
 
 async function finishMessage() {
 
@@ -602,7 +623,9 @@ async function finishMessage() {
 }
 
 
-/* ACİL DURUM */
+/* =========================
+   ACİL DURUM
+========================= */
 
 let emergencyCount = 0;
 
@@ -648,6 +671,8 @@ function emergency() {
 
     }, 700);
 
+
+    /* TELEGRAMA ACİL BİLDİRİMİ */
 
     fetch(
         WORKER_URL +
